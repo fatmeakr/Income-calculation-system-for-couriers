@@ -16,5 +16,5 @@ def weakly_income_calculation():
                 date__lt=datetime.today() - datetime.timedelta(days=7),
             )
         ).aggregate(sum=Sum("amount"))
-        to_create.append(CourierWeaklyIncome(courier=courier, amount=weakly_amount['sum']))
+        to_create.append(CourierWeaklyIncome(courier=courier, amount=weakly_amount['sum']), date=datetime.today())
     CourierWeaklyIncome.objects.bulk_create(to_create)
