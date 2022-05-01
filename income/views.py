@@ -20,7 +20,7 @@ class CourierWeaklyIncomeListView(APIView):
                 from_date = datetime.strptime(from_date, '%Y/%m/%d')
                 to_date = datetime.strptime(to_date, '%Y/%m/%d')
                 weakly_incomes = CourierWeaklyIncome.objects.filter(
-                    Q(date__lte=from_date, date__gte=to_date)
+                    Q(date__lt=from_date, date__gte=to_date)
                 )
                 return Response(self.serializer_class(weakly_incomes, many=True).data)
             except ValueError:
